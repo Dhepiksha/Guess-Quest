@@ -1,0 +1,455 @@
+
+/* =========================
+   GENERAL STYLES
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Rubik', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: #191426;
+    color: #FFFFFF;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* =========================
+   ANIMATED BACKGROUND SHAPES
+========================= */
+
+.bubble {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 55%;
+    height: 100vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.bubble span {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+
+    background: #B967FF;
+    color: #FFFFFF;
+    box-shadow: 0 0 6px rgba(185, 103, 255, 0.25);
+
+    animation-name: floatShape;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-duration: calc(100s / var(--i));
+    animation-delay: calc(var(--i) * -0.7s);
+}
+
+/* Shapes */
+
+.bubble .circle {
+    border-radius: 50%;
+}
+
+.bubble .square {
+    border-radius: 7px;
+}
+
+.bubble .triangle {
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.bubble .diamond {
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+.bubble .hexagon {
+    clip-path: polygon(
+        25% 0%, 75% 0%, 100% 50%,
+        75% 100%, 25% 100%, 0% 50%
+    );
+}
+
+.bubble .star {
+    clip-path: polygon(
+        50% 0%, 61% 35%, 98% 35%,
+        68% 57%, 79% 91%, 50% 70%,
+        21% 91%, 32% 57%, 2% 35%, 39% 35%
+    );
+}
+
+.bubble .pentagon {
+    clip-path: polygon(
+        50% 0%, 100% 38%, 81% 100%,
+        19% 100%, 0% 38%
+    );
+}
+
+.bubble .cross {
+    clip-path: polygon(
+        35% 0%, 65% 0%, 65% 35%,
+        100% 35%, 100% 65%, 65% 65%,
+        65% 100%, 35% 100%, 35% 65%,
+        0% 65%, 0% 35%, 35% 35%
+    );
+}
+
+/* Alternate neon pink */
+
+.bubble span:nth-child(even) {
+    background: #FF4FA3;
+    box-shadow: 0 0 6px rgba(255, 79, 163, 0.25);
+}
+
+/* Correct answer */
+
+.bubble span.correct {
+    background: #00E5A0 !important;
+    box-shadow: 0 0 8px rgba(0, 229, 160, 0.3);
+}
+
+/* Reset shape colors */
+
+.bubble span.first {
+    background: #B967FF;
+    box-shadow: 0 0 6px rgba(185, 103, 255, 0.25);
+}
+
+.bubble span.first:nth-child(even) {
+    background: #FF4FA3;
+    box-shadow: 0 0 6px rgba(255, 79, 163, 0.25);
+}
+
+/* =========================
+   BOTTOM-TO-TOP ANIMATION
+========================= */
+
+@keyframes floatShape {
+    0% {
+        transform: translateY(110vh) rotate(0deg);
+    }
+
+    100% {
+        transform: translateY(-120vh) rotate(360deg);
+    }
+}
+
+/* =========================
+   HOME SCREEN
+========================= */
+
+.title {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 50px 10%;
+}
+
+.title h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(80px, 9vw, 110px);
+    color: #B967FF;
+    text-shadow: 0 0 8px rgba(185, 103, 255, 0.25);
+    letter-spacing: 3px;
+}
+
+.subtitle {
+    color: #FF4FA3;
+    font-size: clamp(25px, 4vw, 42px);
+    margin-top: 5px;
+}
+
+.intro {
+    color: #D8D1E8;
+    margin-top: 25px;
+    font-size: 17px;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+button {
+    border: 1px solid #B967FF88;
+    border-radius: 10px;
+    padding: 12px 22px;
+    color: #FF4FA3;
+    background: #B967FF18;
+
+    font-weight: 700;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+button:hover:not(:disabled) {
+    color: #FFFFFF;
+    background: #B967FF30;
+    border-color: #B967FF;
+    box-shadow: 0 0 8px rgba(185, 103, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#buttonu {
+    margin-top: 35px;
+    padding: 16px 45px;
+    font-size: 19px;
+}
+
+/* =========================
+   GAME SCREEN
+========================= */
+
+.game {
+    position: relative;
+    z-index: 1;
+    display: none;
+    min-height: 100vh;
+    padding: 45px 8% 100px;
+}
+
+.game h2 {
+    color: #B967FF;
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(60px, 6vw, 90px);
+    margin-bottom: 12px;
+}
+
+.game h4 {
+    color: #D8D1E8;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.8;
+    max-width: 750px;
+}
+
+.game-content {
+    max-width: 650px;
+    margin-top: 35px;
+}
+
+.game-content label {
+    display: block;
+    color: #FF4FA3;
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.input-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+input {
+    width: 150px;
+    padding: 12px;
+    border: 1px solid #B967FF;
+    border-radius: 8px;
+    background: #B967FF18;
+    color: #FFFFFF;
+    font-size: 24px;
+    outline: none;
+}
+
+input:focus {
+    border-color: #FF4FA3;
+    box-shadow: 0 0 6px rgba(185, 103, 255, 0.3);
+}
+
+input::placeholder {
+    color: #B8AEC9;
+}
+
+.attempts {
+    color: #B967FF;
+    margin-top: 25px;
+    font-size: 22px;
+}
+
+.previous {
+    color: #FF4FA3;
+    margin-top: 18px;
+    font-size: 22px;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+#guessings {
+    color: #FFFFFF;
+}
+
+#results {
+    display: block;
+    min-height: 30px;
+    margin-top: 25px;
+    color: #D9A8FF;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+#restart {
+    margin-top: 20px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+    background: #130F20DD;
+    color: #B8AEC9;
+    font-size: 16px;
+}
+
+/* =========================
+   TABLETS
+========================= */
+
+@media screen and (max-width: 800px) {
+    .title {
+        padding: 40px 7%;
+    }
+
+    .game {
+        padding: 40px 6% 100px;
+    }
+
+    .bubble {
+        width: 30%;
+    }
+
+    .bubble span {
+        width: 75px;
+        height: 75px;
+        margin: 5px;
+    }
+
+    .game h4 {
+        max-width: 85%;
+    }
+}
+
+/* =========================
+   MOBILE PHONES
+========================= */
+
+@media screen and (max-width: 600px) {
+    .title {
+        padding: 35px 8%;
+    }
+
+    .title h1 {
+        font-size: 55px;
+    }
+
+    .subtitle {
+        font-size: 28px;
+    }
+
+    .intro {
+        font-size: 16px;
+    }
+
+    .game {
+        padding: 30px 6% 100px;
+    }
+
+    .game h2 {
+        font-size: 60px;
+    }
+
+    .game h4 {
+        font-size: 16px;
+        line-height: 1.7;
+        max-width: 100%;
+    }
+
+    .game-content {
+        margin-top: 28px;
+    }
+
+    .game-content label {
+        font-size: 24px;
+    }
+
+    .input-row {
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    input {
+        width: 110px;
+        font-size: 20px;
+    }
+
+    button {
+        padding: 11px 13px;
+        font-size: 15px;
+    }
+
+    .attempts,
+    .previous {
+        font-size: 19px;
+    }
+
+    #results {
+        font-size: 20px;
+    }
+
+    .bubble {
+        width: 45%;
+    }
+
+    .bubble span {
+        width: 35px;
+        height: 35px;
+        margin: 3px;
+        font-size: 12px;
+    }
+
+    .footer {
+        font-size: 13px;
+        padding: 12px 5px;
+    }
+}

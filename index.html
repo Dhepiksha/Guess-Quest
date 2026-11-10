@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GuessQuest - The Number Hunt</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&family=Oswald:wght@300;500&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- Animated Shapes -->
+        <div class="bubble">
+            <span class="circle" id="randomnum1" style="--i:11"></span>
+            <span class="square" id="randomnum2" style="--i:15"></span>
+            <span class="triangle" id="randomnum3" style="--i:20"></span>
+            <span class="diamond" id="randomnum4" style="--i:25"></span>
+            <span class="hexagon" id="randomnum5" style="--i:18"></span>
+            <span class="star" id="randomnum6" style="--i:22"></span>
+            <span class="pentagon" id="randomnum7" style="--i:17"></span>
+            <span class="cross" id="randomnum8" style="--i:24"></span>
+        </div>
+
+        <!-- Home Screen -->
+        <section class="title" id="title">
+            <h1>GuessQuest</h1>
+            <p class="subtitle">The Number Hunt</p>
+
+            <p class="intro">
+                Ready to test your guessing skills?
+            </p>
+
+            <button id="buttonu" onclick="myfunc()">START GAME</button>
+
+            <div class="footer">Created by Dhepiksha_N</div>
+        </section>
+
+        <!-- Game Screen -->
+        <section class="game" id="game">
+            <h2>GuessQuest</h2>
+
+            <h4>
+                We have selected a random number between 1 and 100.
+                <br>
+                Guess it in 10 turns or fewer!
+                <br>
+                We'll tell you if your guess is too high or too low.
+            </h4>
+
+            <div class="game-content">
+                <label for="guess">Enter your guess:</label>
+
+                <div class="input-row">
+                    <input
+                        type="number"
+                        id="guess"
+                        min="1"
+                        max="100"
+                        placeholder="1–100"
+                        autocomplete="off"
+                    >
+
+                    <button id="submitu" onclick="myFunction()">
+                        Submit Guess
+                    </button>
+                </div>
+
+                <p class="attempts">
+                    Attempts: <span id="attemptCount">0</span>/10
+                </p>
+
+                <p class="previous">
+                    Previous Guesses:
+                    <span id="guessings">None</span>
+                </p>
+
+                <div id="results" role="status" aria-live="polite">
+                    Good luck!
+                </div>
+
+                <button id="restart" onclick="functionres()">
+                    Restart Game
+                </button>
+            </div>
+
+            <div class="footer">Created by Dhepiksha_N</div>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
